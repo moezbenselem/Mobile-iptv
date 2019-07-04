@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_channels"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Channels List" />
+        <item
+            android:id="@+id/nav_schedule"
+            android:icon="@drawable/schedule"
+            android:title="Schedule" />
+        <item
+            android:id="@+id/nav_propo"
+            android:icon="@drawable/about"
+            android:title="About us" />
+        <item
+            android:id="@+id/nav_policies"
+            android:icon="@drawable/privacy"
+            android:title="Our Policy" />
+
+    </group>
+
+</menu>
