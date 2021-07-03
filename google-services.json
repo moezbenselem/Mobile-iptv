@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "39216270785",
+    "firebase_url": "https://mobiletv-affe9.firebaseio.com",
+    "project_id": "mobiletv-affe9",
+    "storage_bucket": "mobiletv-affe9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39216270785:android:435c3a21a482836b",
+        "android_client_info": {
+          "package_name": "moezbenselem.mobilewatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39216270785-r7shiko374cl7nnprqo1aoei0ha8pr47.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "moezbenselem.mobilewatch",
+            "certificate_hash": "3a0e76228ec24838696e2b26d8711bb555484231"
+          }
+        },
+        {
+          "client_id": "39216270785-8b6l1i3n6hlddenrsnhj76d0qlb1405q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPLc3UL1b32zO-dMguD9-xtNz9OK15u7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39216270785-8b6l1i3n6hlddenrsnhj76d0qlb1405q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

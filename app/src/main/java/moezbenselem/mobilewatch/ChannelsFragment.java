@@ -2,35 +2,26 @@ package moezbenselem.mobilewatch;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-
-
-import org.json.JSONArray;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
 
 
 /**
@@ -44,6 +35,7 @@ public class ChannelsFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
     private InterstitialAd mInterstitialAd;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -94,13 +86,13 @@ public class ChannelsFragment extends Fragment {
 
         try {
 
-        recyclerChannels = (RecyclerView)view.findViewById(R.id.recycler_channels);
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerChannels.setLayoutManager(layoutManager);
-        int id = getArguments().getInt("id");
-        System.out.println("id = "+id);
-        getChannels(id);
-        }catch (Exception e){
+            recyclerChannels = (RecyclerView) view.findViewById(R.id.recycler_channels);
+            layoutManager = new LinearLayoutManager(getContext());
+            recyclerChannels.setLayoutManager(layoutManager);
+            String id = getArguments().getString("id");
+            System.out.println("id = " + id);
+            getChannels(id);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -111,62 +103,33 @@ public class ChannelsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_channels, container, false);
     }
+
     ArrayList<Channel> list;
-    void getChannels(int id){
+
+    void getChannels(String catId) {
         list = new ArrayList();
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://www.debdev.tk/Mobiletv/getChannels.php?id="+id,
-                new Response.Listener<String>() {
+        MainActivity.db.collection("categories").document(catId).collection("channels")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onResponse(String response) {
-                        try {
-                            response = response.replaceAll("<div style=\"text-align: right;position: fixed;top: 5px;right:5px;width: 100%;z-index:999999;cursor: pointer;line-height: 0;display:block;\"><a target=\"_blank\" href=\"https://www.freewebhostingarea.com\" title=\"Free Web Hosting with php7\"><img alt=\"Free Web Hosting\" width=\"350\" height=\"25\" src=\"https://www.freewebhostingarea.com/images/poweredby.gif\" style=\"border-width: 0px;\"></a></div>","");
-                            //System.out.println(response);
-                            JSONArray jsonArray = new JSONArray(response);
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                System.out.println("doc : " + document.getData().get("name"));
+                                try {
+                                    Channel c = document.toObject(Channel.class);
+                                    list.add(c);
 
-                            //System.out.println(jsonArray);
-                            for (int i = 0;i<jsonArray.length();i++){
-                                //System.out.println(jsonArray.getJSONObject(i));
-                                Channel c = new Channel(jsonArray.getJSONObject(i));
-                                list.add(c);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
                             }
-                            adapter = new RecyclerChannels(list,getContext());
+                            adapter = new RecyclerChannels(list, getContext());
                             recyclerChannels.setAdapter(adapter);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-
                     }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                error.printStackTrace();
-            }
-        })
-        {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> params = new Hashtable<>();
-
-                return params;
-            }
-
-            /**
-             * Passing some request headers
-             */
-        };
-
-        {
-            int socketTimeout = 30000;
-            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-            stringRequest.setRetryPolicy(policy);
-            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-            requestQueue.add(stringRequest);
-        }
+                });
 
     }
 
@@ -174,7 +137,7 @@ public class ChannelsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         System.out.println("channels resumed");
-        if(mInterstitialAd.isLoaded()){
+        if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
     }

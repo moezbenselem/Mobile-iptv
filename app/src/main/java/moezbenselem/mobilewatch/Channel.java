@@ -12,15 +12,37 @@ public class Channel {
     String name,url;
     String logo;
 
-    public Channel(JSONObject c) {
-        try {
-            this.name = c.getString("name");
-            this.url = c.getString("url").replaceAll("\\b","");
-            this.logo = c.getString("logo").replaceAll("\\b","");
-            //System.out.println(logo);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
+    public Channel() {
     }
 
+    public Channel(String name, String url, String logo) {
+        this.name = name;
+        this.url = url;
+        this.logo = logo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 }

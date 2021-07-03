@@ -9,15 +9,11 @@
         <item
             android:id="@+id/nav_schedule"
             android:icon="@drawable/schedule"
-            android:title="Schedule" />
+            android:title="Football Schedule" />
         <item
-            android:id="@+id/nav_propo"
-            android:icon="@drawable/about"
-            android:title="About us" />
-        <item
-            android:id="@+id/nav_policies"
-            android:icon="@drawable/privacy"
-            android:title="Our Policy" />
+            android:id="@+id/nav_movies"
+            android:icon="@drawable/movies"
+            android:title="Movies" />
 
     </group>
 

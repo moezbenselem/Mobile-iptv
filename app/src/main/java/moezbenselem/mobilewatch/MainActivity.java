@@ -1,24 +1,26 @@
 package moezbenselem.mobilewatch;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    public static FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +28,10 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        MobileAds.initialize(this, "ca-app-pub-7087198421941611~5594249131");
+        //MobileAds.initialize(this, "ca-app-pub-7087198421941611~5594249131");
 
         try {
-
+            db = FirebaseFirestore.getInstance();
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             tx.replace(R.id.content_main, new CategoriesFragment());
             tx.commit();
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+//        Intent toPlayer = new Intent(this, PlayerActivity.class);
+//        toPlayer.putExtra("link", "http://163.172.103.202:8880/287994003246/287994003246/16716");
+//        startActivity(toPlayer);
     }
 
     @Override
@@ -71,7 +77,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_propo) {
+            Intent intent = new Intent(this,About.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.action_policies) {
+            Intent intent = new Intent(this,Policy.class);
+            startActivity(intent);
             return true;
         }
 
@@ -87,12 +99,7 @@ public class MainActivity extends AppCompatActivity
         Class fragmentClass = null;
         if (id == R.id.nav_channels) {
             fragmentClass = CategoriesFragment.class;
-        } else if (id == R.id.nav_policies) {
-
-        } else if (id == R.id.nav_propo) {
-
-        } else if (id == R.id.nav_schedule) {
-
+        }else if (id == R.id.nav_schedule) {
             fragmentClass = ScheduleFragment.class;
         }
 

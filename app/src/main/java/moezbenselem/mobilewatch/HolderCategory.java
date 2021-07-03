@@ -1,16 +1,12 @@
 package moezbenselem.mobilewatch;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -35,7 +31,7 @@ public class HolderCategory  extends RecyclerView.ViewHolder {
                 try {int position = getAdapterPosition();
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
                     Bundle bundle = new Bundle();
-                    bundle.putInt("id", rows.get(position).id);
+                    bundle.putString("id", rows.get(position).id);
 
                     Fragment myFragment = new ChannelsFragment();
                     myFragment.setArguments(bundle);

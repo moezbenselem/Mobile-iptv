@@ -10,11 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_mobile_watch"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7087198421941611~5594249131"/>
+            android:value="ca-app-pub-7087198421941611~5594249131" />
 
         <activity
             android:name=".MainActivity"
@@ -27,10 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlayerActivity" android:screenOrientation="landscape"
-
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+        <activity
+            android:name=".PlayerActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".About" />
+        <activity android:name=".Policy"></activity>
     </application>
 
 </manifest>
