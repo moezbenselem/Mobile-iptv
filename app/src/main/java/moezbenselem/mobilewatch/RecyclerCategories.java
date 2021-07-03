@@ -1,10 +1,11 @@
 package moezbenselem.mobilewatch;
 
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -21,7 +22,7 @@ public class RecyclerCategories extends RecyclerView.Adapter {
     ArrayList<Category> listRows;
     HolderCategory viewHolder;
 
-    public RecyclerCategories(ArrayList<Category> listRows,Context context) {
+    public RecyclerCategories(ArrayList<Category> listRows, Context context) {
         this.context = context;
         this.listRows = listRows;
     }
@@ -30,7 +31,7 @@ public class RecyclerCategories extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_category, parent, false);
-        viewHolder = new HolderCategory(v,listRows,context);
+        viewHolder = new HolderCategory(v, listRows, context);
 
         return viewHolder;
     }

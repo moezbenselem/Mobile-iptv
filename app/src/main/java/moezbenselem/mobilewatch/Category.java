@@ -1,14 +1,12 @@
 package moezbenselem.mobilewatch;
 
-import org.json.JSONObject;
-
 /**
  * Created by Moez on 02/07/2019.
  */
 
 public class Category {
 
-    String id,category,logo;
+    String id, category, logo;
 
     public Category() {
     }

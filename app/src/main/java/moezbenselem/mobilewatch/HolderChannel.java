@@ -2,10 +2,11 @@ package moezbenselem.mobilewatch;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -15,21 +16,22 @@ import java.util.ArrayList;
 
 public class HolderChannel extends RecyclerView.ViewHolder {
 
+    static Context context;
     public TextView channel_name;
     public ImageView logo;
-    static Context context;
 
-    public HolderChannel(View itemView, final ArrayList<Channel> rows, final Context context){
+    public HolderChannel(View itemView, final ArrayList<Channel> rows, final Context context) {
         super(itemView);
         this.context = context;
-        this.channel_name = (TextView)itemView.findViewById(R.id.channel_name);
+        this.channel_name = (TextView) itemView.findViewById(R.id.channel_name);
         this.logo = itemView.findViewById(R.id.imageView);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                try {int position = getAdapterPosition();
+                try {
+                    int position = getAdapterPosition();
                     Intent toPlayer = new Intent(context, PlayerActivity.class);
                     toPlayer.putExtra("link", rows.get(position).url);
                     context.startActivity(toPlayer);

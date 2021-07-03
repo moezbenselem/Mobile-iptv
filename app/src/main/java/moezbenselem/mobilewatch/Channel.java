@@ -1,15 +1,11 @@
 package moezbenselem.mobilewatch;
 
-import android.graphics.drawable.Drawable;
-
-import org.json.JSONObject;
-
 /**
  * Created by Moez on 02/07/2019.
  */
 
 public class Channel {
-    String name,url;
+    String name, url;
     String logo;
 
 

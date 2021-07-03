@@ -6,10 +6,10 @@
         android:id="@+id/action_propo"
         android:icon="@drawable/about"
         android:title="About us"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_policies"
         android:title="Privacy Policy"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 </menu>

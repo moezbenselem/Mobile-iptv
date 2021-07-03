@@ -2,25 +2,26 @@ package moezbenselem.mobilewatch;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.ads.MobileAds;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             tx.replace(R.id.content_main, new CategoriesFragment());
             tx.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -78,11 +79,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_propo) {
-            Intent intent = new Intent(this,About.class);
+            Intent intent = new Intent(this, About.class);
             startActivity(intent);
             return true;
-        }else if (id == R.id.action_policies) {
-            Intent intent = new Intent(this,Policy.class);
+        } else if (id == R.id.action_policies) {
+            Intent intent = new Intent(this, Policy.class);
             startActivity(intent);
             return true;
         }
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity
         Class fragmentClass = null;
         if (id == R.id.nav_channels) {
             fragmentClass = CategoriesFragment.class;
-        }else if (id == R.id.nav_schedule) {
+        } else if (id == R.id.nav_schedule) {
             fragmentClass = ScheduleFragment.class;
         }
 

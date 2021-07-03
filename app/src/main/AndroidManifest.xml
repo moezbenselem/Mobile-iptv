@@ -10,8 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_mobile_watch"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7087198421941611~5594249131" />

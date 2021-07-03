@@ -29,11 +29,12 @@ import java.util.ArrayList;
  */
 public class ChannelsFragment extends Fragment {
 
-    private AdView mAdView;
     ArrayList<Channel> listChannels;
     RecyclerView recyclerChannels;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
+    ArrayList<Channel> list;
+    private AdView mAdView;
     private InterstitialAd mInterstitialAd;
 
     @Override
@@ -103,8 +104,6 @@ public class ChannelsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_channels, container, false);
     }
-
-    ArrayList<Channel> list;
 
     void getChannels(String catId) {
         list = new ArrayList();

@@ -16,40 +16,39 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:textSize="23dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Mobile Tv App"
         android:textAlignment="center"
-        android:text="Mobile Tv App" />
+        android:textSize="23dp" />
 
     <TextView
         android:id="@+id/textView3"
-        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Developed by BENSELEM MOEZ" />
+        android:text="Developed by BENSELEM MOEZ"
+        android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
-        >
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/linkedin"
-            android:layout_gravity="center"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
             app:srcCompat="@drawable/linkedin" />
 
         <ImageView
             android:id="@+id/github"
-            android:layout_gravity="center"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
             app:srcCompat="@drawable/github" />
 

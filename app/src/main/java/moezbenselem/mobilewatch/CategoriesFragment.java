@@ -27,11 +27,12 @@ import java.util.ArrayList;
  */
 public class CategoriesFragment extends Fragment {
 
-    private AdView mAdView;
     ArrayList<Channel> listChannels;
     RecyclerView recyclerCategories;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
+    ArrayList<Category> list;
+    private AdView mAdView;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -63,8 +64,6 @@ public class CategoriesFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_categories, container, false);
     }
 
-    ArrayList<Category> list;
-
     void getCategories() {
         try {
             list = new ArrayList();
@@ -75,13 +74,13 @@ public class CategoriesFragment extends Fragment {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    System.out.println("doc : "+document.getData().get("logo"));
+                                    System.out.println("doc : " + document.getData().get("logo"));
                                     try {
                                         Category c = document.toObject(Category.class);
                                         c.setId(document.getId());
                                         list.add(c);
 
-                                    }catch (Exception e){
+                                    } catch (Exception e) {
                                         e.printStackTrace();
                                     }
 

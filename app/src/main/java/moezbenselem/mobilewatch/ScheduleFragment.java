@@ -2,13 +2,14 @@ package moezbenselem.mobilewatch;
 
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -22,6 +23,7 @@ public class ScheduleFragment extends Fragment {
 
     WebView webView;
     private AdView mAdView;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

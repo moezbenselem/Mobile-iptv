@@ -1,10 +1,11 @@
 package moezbenselem.mobilewatch;
 
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -21,7 +22,7 @@ public class RecyclerChannels extends RecyclerView.Adapter {
     ArrayList<Channel> listRows;
     HolderChannel viewHolder;
 
-    public RecyclerChannels(ArrayList<Channel> listRows,Context context) {
+    public RecyclerChannels(ArrayList<Channel> listRows, Context context) {
         this.context = context;
         this.listRows = listRows;
     }
@@ -30,7 +31,7 @@ public class RecyclerChannels extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_channel, parent, false);
-        viewHolder = new HolderChannel(v,listRows,context);
+        viewHolder = new HolderChannel(v, listRows, context);
 
         return viewHolder;
     }
@@ -39,7 +40,7 @@ public class RecyclerChannels extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         viewHolder = (HolderChannel) holder;
-        if(listRows.get(position).name.contains("Bein Sports Max"))
+        if (listRows.get(position).name.contains("Bein Sports Max"))
             viewHolder.channel_name.setText(listRows.get(position).name);
 
         Picasso.with(context).load(listRows.get(position).logo)
