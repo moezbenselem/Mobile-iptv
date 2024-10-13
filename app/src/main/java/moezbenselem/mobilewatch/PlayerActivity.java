@@ -1,5 +1,6 @@
 package moezbenselem.mobilewatch;
 
+import android.media.browse.MediaBrowser;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,27 +8,22 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.extractor.ExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelection;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.audio.AudioAttributes;
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
 import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.BandwidthMeter;
-import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.ui.StyledPlayerView;
+import com.google.android.exoplayer2.util.MimeTypes;
 
 
 public class PlayerActivity extends AppCompatActivity {
 
     PlayerView playerView;
-    SimpleExoPlayer player;
+    ExoPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,27 +36,21 @@ public class PlayerActivity extends AppCompatActivity {
         playerView = (PlayerView) findViewById(R.id.video_player);
         Uri videoUri = Uri.parse(getIntent().getStringExtra("link"));
 
-        Handler mainHandler = new Handler();
-        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-        TrackSelection.Factory videoTrackSelectionFactory =
-                new AdaptiveTrackSelection.Factory(bandwidthMeter);
-        TrackSelector trackSelector =
-                new DefaultTrackSelector(videoTrackSelectionFactory);
 
-        player =
-                ExoPlayerFactory.newSimpleInstance(this, trackSelector);
+        // Create a SimpleExoPlayer
+        player = new SimpleExoPlayer.Builder(this).build();
 
+        // Set the player to the view
         playerView.setPlayer(player);
+        // Create a MediaItem
+        MediaItem mediaItem = MediaItem.fromUri(videoUri);
 
-        // Produces DataSource instances through which media data is loaded.
-        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, "MobileWatch");
-        // Produces Extractor instances for parsing the media data.
-        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-        // This is the MediaSource representing the media to be played.
-        MediaSource videoSource = new ExtractorMediaSource(videoUri,
-                dataSourceFactory, extractorsFactory, null, null);
-        // Prepare the player with the source.
-        player.prepare(videoSource);
+        // Set the MediaItem to the player
+        player.setMediaItem(mediaItem);
+
+        // Prepare the player
+        player.prepare();
+
         player.setPlayWhenReady(true);
         player.setRepeatMode(SimpleExoPlayer.REPEAT_MODE_ONE);
 
@@ -69,8 +59,9 @@ public class PlayerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        player.release();
-
+        if (player != null) {
+            player.release();
+        }
         super.onBackPressed();
     }
 
@@ -82,9 +73,11 @@ public class PlayerActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        player.release();
-        super.onDestroy();
+        if (player != null) {
+            player.release();
+        }        super.onDestroy();
     }
+
 }
 
 

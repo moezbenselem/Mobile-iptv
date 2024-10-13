@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.*;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -44,7 +45,7 @@ public class ChannelsFragment extends Fragment {
         mAdView = view.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
+/*
         mInterstitialAd = new InterstitialAd(getContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-7087198421941611/7843162043");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
@@ -85,6 +86,8 @@ public class ChannelsFragment extends Fragment {
         });
 
 
+
+ */
         try {
 
             recyclerChannels = (RecyclerView) view.findViewById(R.id.recycler_channels);
@@ -136,9 +139,12 @@ public class ChannelsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         System.out.println("channels resumed");
+        /*
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
+
+         */
     }
 }
 
